@@ -105,12 +105,12 @@ void command(char* c) {
 
 void setFrag(char* c) {
     sandbox.setSource(FRAGMENT, std::string(c) );
-    sandbox.reloadShaders(files);
+    sandbox.resetShaders(files);
 }
 
 void setVert(char* c) {
     sandbox.setSource(VERTEX, std::string(c) );
-    sandbox.reloadShaders(files);
+    sandbox.resetShaders(files);
 }
 
 char* getFrag() {
@@ -1554,7 +1554,7 @@ void commandsInit() {
         #if defined(__EMSCRIPTEN__)
         // Commands are parse in the main GL loop in EMSCRIPTEN,
         // there is no risk to reload shaders outside main GL thread
-        sandbox.reloadShaders(files);
+        sandbox.resetShaders(files);
         #else
         // Reloading shaders can't be done directly on multi-thread (event thread)
         // to solve that, we trigger reloading by flagging changes on all files
